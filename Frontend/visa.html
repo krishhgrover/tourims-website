@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MakeMyJourney - Visa</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body style="background-color: #e5eef5;">
+    <div style="background-color: #0a1429; text-align: center; padding: 20px 0;">
+        <h1 style="color: white; margin: 0; font-style: italic;">MakeMyJourney</h1>
+    </div>
+
+    <div class="navbar">
+        <a href="index.html">✈️ Home</a>
+        <a href="packages.html">🌴 Holiday Packages</a>
+        <a href="recommender.html">🧭 AI Recommender</a>
+        <a href="booking.html">🎫 Manage Booking</a>
+        <a href="visa.html">🛂 Visa Services</a>
+        <a href="offers.html">🏷️ Offers</a>
+    </div>
+
+    <div class="container">
+        <h2>Visa-On-Arrival Eligibility</h2>
+        <p>Check if you qualify for our instant e-Visa service based on demographic restrictions.</p>
+        <button onclick="checkVisa()" class="btn-primary">Start e-Visa Check</button>
+
+        <hr style="margin: 40px 0;">
+
+        <h2>Server Clock Sync</h2>
+        <p>Hover below to sync with our global server time.</p>
+        <button onmouseover="showServerTime()" style="padding: 10px; background: #eee; border: 1px solid #ccc; cursor: pointer;">
+            Hover here to sync Server Date
+        </button>
+        <p id="dateDisplay" style="color: #065af3; font-weight: bold; margin-top: 15px;"></p>
+    </div>
+</body>
+</html>

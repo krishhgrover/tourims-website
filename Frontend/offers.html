@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MakeMyJourney - Offers</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body style="background-color: #e5eef5;">
+    <div style="background-color: #0a1429; text-align: center; padding: 20px 0;">
+        <h1 style="color: white; margin: 0; font-style: italic;">MakeMyJourney</h1>
+    </div>
+
+    <div class="navbar">
+        <a href="index.html">✈️ Home</a>
+        <a href="packages.html">🌴 Holiday Packages</a>
+        <a href="recommender.html">🧭 AI Recommender</a>
+        <a href="booking.html">🎫 Manage Booking</a>
+        <a href="visa.html">🛂 Visa Services</a>
+        <a href="offers.html">🏷️ Offers</a>
+    </div>
+
+    <div class="container">
+        <h2>My Account & Utilities</h2>
+        <div style="display: flex; gap: 20px;">
+            <div style="flex: 1; border: 1px solid #ddd; padding: 15px; border-radius: 8px;">
+                <h3>Print E-Ticket Name</h3>
+                <label>First Name:</label><br>
+                <input type="text" id="fName" onkeyup="formatTicketName()" style="width: 90%;"><br><br>
+                <label>Last Name:</label><br>
+                <input type="text" id="lName" onkeyup="formatTicketName()" style="width: 90%;"><br><br>
+                <label>Boarding Pass Result:</label><br>
+                <input type="text" id="ticketNameResult" readonly style="background-color: #f2f6fa; font-weight: bold; width: 90%;">
+            </div>
+
+            <div style="flex: 1; border: 1px solid #ddd; padding: 15px; border-radius: 8px;">
+                <h3>Verify Account Email</h3>
+                <input type="text" id="loginEmail" placeholder="user@domain.com" style="width: 90%; padding: 8px;"><br><br>
+                <button onclick="verifyEmail()" class="btn-primary">Verify '@' Position</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

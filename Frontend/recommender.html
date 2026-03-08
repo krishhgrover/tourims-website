@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MakeMyJourney - AI Recommender</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body style="background-color: #e5eef5;">
+    <div style="background-color: #0a1429; text-align: center; padding: 20px 0;">
+        <h1 style="color: white; margin: 0; font-style: italic;">MakeMyJourney</h1>
+    </div>
+
+    <div class="navbar">
+        <a href="index.html">✈️ Home</a>
+        <a href="packages.html">🌴 Holiday Packages</a>
+        <a href="recommender.html">🧭 AI Recommender</a>
+        <a href="booking.html">🎫 Manage Booking</a>
+        <a href="visa.html">🛂 Visa Services</a>
+        <a href="offers.html">🏷️ Offers</a>
+    </div>
+
+    <div class="container" style="text-align: center;">
+        <h1 style="color: #0a1429;">🌍 Advanced AI Travel Recommender</h1>
+        <p>Our algorithm will now analyze your specific travel persona.</p>
+
+        <select id="budget" class="recommender-select">
+            <option value="">Select Budget</option>
+            <option value="student">Student / Shoestring</option>
+            <option value="standard">Standard Comfort</option>
+            <option value="premium">Premium / Business</option>
+            <option value="ultra">Ultra Luxury</option>
+        </select>
+
+        <select id="type" class="recommender-select">
+            <option value="">Preferred Terrain</option>
+            <option value="beach">Tropical Beaches</option>
+            <option value="mountain">Snowy Mountains</option>
+            <option value="city">Historic Cities</option>
+            <option value="desert">Desert Safari</option>
+            <option value="jungle">Wilderness / Jungle</option>
+        </select>
+
+        <select id="vibe" class="recommender-select">
+            <option value="">Travel Vibe</option>
+            <option value="relaxed">Relaxed & Spa</option>
+            <option value="adventure">Hardcore Adventure</option>
+            <option value="cultural">Cultural & Religious</option>
+            <option value="party">Nightlife & Party</option>
+        </select>
+
+        <br><br>
+        <button onclick="recommend()" class="btn-primary">Analyze & Find Destination</button>
+        
+        <div id="result" class="result-card" style="display:none; margin-top: 30px; border: 2px solid #065af3; padding: 25px; border-radius: 15px; background: #fff;">
+        </div>
+    </div>
+</body>
+</html>
