@@ -5,7 +5,7 @@ function validateBooking() {
     var phone = document.getElementById("pnrPhone").value;
     var isValid = true;
 
-    if (name == "" || name.length != 10) {
+    if (name == "" || name.length >= 5) {
         document.getElementById("nameErr").innerHTML = "Traveler name must be exactly 10 characters long.";
         isValid = false;
     } else {
@@ -121,4 +121,67 @@ function checkVisa() {
 
 function showServerTime() {
     document.getElementById("dateDisplay").innerHTML = "Current Server Time: " + Date();
+}
+// --- 7. INTERACTIVE TRANSPORT BOOKING ---
+// Tracks the current selected mode
+var currentMode = "flight"; 
+
+function switchTransport(mode) {
+    currentMode = mode;
+    var classDropdown = document.getElementById("travelClass");
+    var searchBtn = document.getElementById("searchBtn");
+    
+    // Reset all button styles to default
+    document.getElementById("btnFlight").className = "tab-btn";
+    document.getElementById("btnTrain").className = "tab-btn";
+    document.getElementById("btnBus").className = "tab-btn";
+
+    // Change dropdown options and button text dynamically
+    if (mode === "flight") {
+        document.getElementById("btnFlight").className = "tab-btn active-tab";
+        searchBtn.value = "Search Flights";
+        classDropdown.innerHTML = `
+            <option value="economy">Economy Class</option>
+            <option value="business">Business Class</option>
+            <option value="first">First Class</option>
+        `;
+    } 
+    else if (mode === "train") {
+        document.getElementById("btnTrain").className = "tab-btn active-tab";
+        searchBtn.value = "Search Trains";
+        classDropdown.innerHTML = `
+            <option value="sleeper">Sleeper Class (SL)</option>
+            <option value="3ac">Third AC (3A)</option>
+            <option value="2ac">Second AC (2A)</option>
+        `;
+    } 
+    else if (mode === "bus") {
+        document.getElementById("btnBus").className = "tab-btn active-tab";
+        searchBtn.value = "Search Buses";
+        classDropdown.innerHTML = `
+            <option value="seater">Non-AC Seater</option>
+            <option value="semi">AC Semi-Sleeper</option>
+            <option value="sleeper">AC Volvo Sleeper</option>
+        `;
+    }
+}
+
+function searchTransport(event) {
+    // Prevent the form from refreshing the page
+    event.preventDefault();
+    
+    var from = document.getElementById("travelFrom").value.toUpperCase();
+    var to = document.getElementById("travelTo").value.toUpperCase();
+    var date = document.getElementById("travelDate").value;
+    var pax = document.getElementById("travelPax").value;
+    
+    var resultDiv = document.getElementById("transportResult");
+    
+    // Create an interactive, customized output message
+    resultDiv.innerHTML = "⏳ Searching database for " + currentMode + "s from " + from + " to " + to + " on " + date + " for " + pax + " passenger(s)...";
+    
+    // Simulate a loading delay using setTimeout (Bonus JS feature!)
+    setTimeout(function() {
+        resultDiv.innerHTML = "✅ Found 5 available " + currentMode + "s for your route! <br><a href='booking.html' style='color:#0a1429;'>Proceed to Booking ➔</a>";
+    }, 2000); // 2000 milliseconds = 2 seconds
 }

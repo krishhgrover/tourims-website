@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MakeMyJourney - Transport Search</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body style="background-color: #e5eef5;">
+    <div style="background-color: #0a1429; text-align: center; padding: 20px 0;">
+        <h1 style="color: white; margin: 0; font-style: italic;">MakeMyJourney</h1>
+    </div>
+
+    <div class="navbar">
+        <a href="index.html">✈️ Home</a>
+        <a href="packages.html">🌴 Holiday Packages</a>
+        <a href="recommender.html">🧭 AI Recommender</a>
+        <a href="transport.html">🚆 Book Tickets</a>
+        <a href="booking.html">🎫 Manage Booking</a>
+        <a href="visa.html">🛂 Visa Services</a>
+        <a href="offers.html">🏷️ Offers</a>
+        <a href="transport.html">Transport</a>
+    </div>
+
+    <div class="container" style="max-width: 600px;">
+        <h2 style="color: #0a1429; text-align: center;">Book Your Journey</h2>
+        <p style="color: #666; text-align: center;">Select your mode of transport to begin searching.</p>
+        
+        <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+            <button id="btnFlight" class="tab-btn active-tab" onclick="switchTransport('flight')">✈️ Flights</button>
+            <button id="btnTrain" class="tab-btn" onclick="switchTransport('train')">🚆 Trains</button>
+            <button id="btnBus" class="tab-btn" onclick="switchTransport('bus')">🚌 Buses</button>
+        </div>
+
+        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px solid #e1e1e1;">
+            <form onsubmit="return searchTransport(event)">
+                <div style="display: flex; gap: 10px;">
+                    <div style="flex: 1;">
+                        <label>From:</label><br>
+                        <input type="text" id="travelFrom" required placeholder="Leaving from..." style="width: 90%; padding: 10px; margin-top: 5px;">
+                    </div>
+                    <div style="flex: 1;">
+                        <label>To:</label><br>
+                        <input type="text" id="travelTo" required placeholder="Going to..." style="width: 90%; padding: 10px; margin-top: 5px;">
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                    <div style="flex: 1;">
+                        <label>Departure Date:</label><br>
+                        <input type="date" id="travelDate" required style="width: 90%; padding: 10px; margin-top: 5px;">
+                    </div>
+                    <div style="flex: 1;">
+                        <label>Passengers:</label><br>
+                        <input type="number" id="travelPax" required min="1" max="10" value="1" style="width: 90%; padding: 10px; margin-top: 5px;">
+                    </div>
+                </div>
+
+                <div style="margin-top: 15px;">
+                    <label id="classLabel">Select Class/Type:</label><br>
+                    <select id="travelClass" style="width: 95%; padding: 10px; margin-top: 5px;">
+                        <option value="economy">Economy Class</option>
+                        <option value="business">Business Class</option>
+                        <option value="first">First Class</option>
+                    </select>
+                </div>
+
+                <hr style="margin: 20px 0; border: 1px solid #ccc;">
+                <input type="submit" id="searchBtn" class="btn-primary" value="Search Flights" style="width: 100%;">
+            </form>
+        </div>
+        
+        <div id="transportResult" style="margin-top: 20px; text-align: center; color: #065af3; font-weight: bold; font-size: 18px;"></div>
+    </div>
+</body>
+</html>
