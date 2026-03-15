@@ -1,17 +1,20 @@
-// 1. Strict Form Validation (KEEPING YOUR ORIGINAL LOGIC)
+// 1. Updated Form Validation (Phone limit & Gmail check)
 function validateBooking() {
     var name = document.getElementById("pnrName").value;
     var age = document.getElementById("pnrAge").value;
     var phone = document.getElementById("pnrPhone").value;
+    var email = document.getElementById("pnrEmail").value;
     var isValid = true;
 
-    if (name == "" || name.length >= 5) {
-        document.getElementById("nameErr").innerHTML = "Traveler name must be exactly 10 characters long.";
+    // Check Name: Ensures it isn't blank
+    if (name.trim() == "") {
+        document.getElementById("nameErr").innerHTML = "Traveler name is required.";
         isValid = false;
     } else {
         document.getElementById("nameErr").innerHTML = "";
     }
 
+    // Check Age: 21-89
     if (age <= 20 || age >= 90 || isNaN(age)) {
         document.getElementById("ageErr").innerHTML = "Traveler age must be between 21 and 89.";
         isValid = false;
@@ -19,11 +22,20 @@ function validateBooking() {
         document.getElementById("ageErr").innerHTML = "";
     }
 
+    // Check Phone: Exactly 10 digits
     if (phone.length != 10 || isNaN(phone)) {
         document.getElementById("phoneErr").innerHTML = "Mobile number must be exactly 10 digits.";
         isValid = false;
     } else {
         document.getElementById("phoneErr").innerHTML = "";
+    }
+
+    // Check Email: Must end specifically with @gmail.com
+    if (!email.endsWith("@gmail.com")) {
+        document.getElementById("emailErr").innerHTML = "Only @gmail.com addresses are accepted.";
+        isValid = false;
+    } else {
+        document.getElementById("emailErr").innerHTML = "";
     }
 
     if (isValid) {
