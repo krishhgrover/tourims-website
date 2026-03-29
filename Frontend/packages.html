@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MakeMyJourney - Packages</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>MakeMyJourney - Home</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
 <body style="background-color: #e5eef5;">
     <div style="background-color: #0a1429; text-align: center; padding: 20px 0;">
@@ -10,46 +12,83 @@
     </div>
 
     <div class="navbar">
-        <a href="index.html">✈️ Home</a>
-        <a href="packages.html">🌴 Holiday Packages</a>
-        <a href="recommender.html">🧭 AI Recommender</a>
-        <a href="booking.html">🎫 Manage Booking</a>
-        <a href="visa.html">🛂 Visa Services</a>
-        <a href="offers.html">🏷️ Offers</a>
-    </div>
+    <a href="home_page.html"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="transport.html"><i class="fa-solid fa-bus"></i> Transport</a>
+    <a href="packages.html"><i class="fa-solid fa-umbrella-beach"></i> Holiday Packages</a>
+    <a href="recommender.html"><i class="fa-solid fa-compass"></i> AI Recommender</a>
+    <a href="booking.html"><i class="fa-solid fa-ticket"></i> Manage Booking</a>
+    <a href="visa.html"><i class="fa-solid fa-passport"></i> Visa Services</a>
+    <a href="offers.html"><i class="fa-solid fa-tags"></i> Offers</a>
+</div>
 
     <div class="container">
-        <h2 style="color: #0a1429;">Top Trending Holiday Packages</h2>
-        <table>
-            <tr>
-                <th>Category</th>
-                <th>Package Name</th>
-                <th>Inclusions</th>
-                <th>Price (per pax)</th>
-            </tr>
-            <tr>
-                <td rowspan="2"><b>Island Getaways</b></td>
-                <td>Romantic Maldives</td>
-                <td>Flights, 4N Water Villa, Meals</td>
-                <td>₹ 85,000</td>
-            </tr>
-            <tr>
-                <td>Bali Adventure</td>
-                <td>Flights, 5N Hotel, Water Sports</td>
-                <td>₹ 45,000</td>
-            </tr>
-            <tr>
-                <td rowspan="2"><b>Premium Moto Expeditions</b></td>
-                <td>Himalayan High Altitude</td>
-                <td>Flights, Royal Enfield 450, Gear</td>
-                <td>₹ 55,000</td>
-            </tr>
-            <tr>
-                <td>Western Ghats Coastal Ride</td>
-                <td>Flights, Triumph Speed 400, Fuel</td>
-                <td>₹ 48,000</td>
-            </tr>
-        </table>
+
+    <h2 style="color: #0a1429; text-align:center; margin-bottom: 30px;">
+        Top Trending Holiday Packages
+    </h2>
+
+    <div style="display:flex; flex-wrap:wrap; gap:25px; justify-content:center;">
+
+        <!-- Card 1 -->
+        <div style="width: 420px; display:flex; background:white; border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+            
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400" 
+                 style="width:40%; object-fit:cover;">
+
+            <div style="padding:15px;">
+                <h3 style="margin:0;">Romantic Maldives</h3>
+                <p style="color:#555;">Flights, 4N Water Villa, Meals</p>
+                <p style="font-weight:bold;">₹ 85,000</p>
+                <a href="#" style="color:#007bff; text-decoration:none;">View Details ➤</a>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div style="width: 420px; display:flex; background:white; border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+            
+            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400" 
+                 style="width:40%; object-fit:cover;">
+
+            <div style="padding:15px;">
+                <h3 style="margin:0;">Bali Adventure</h3>
+                <p style="color:#555;">Flights, 5N Hotel, Water Sports</p>
+                <p style="font-weight:bold;">₹ 45,000</p>
+                <a href="#" style="color:#007bff; text-decoration:none;">View Details ➤</a>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div style="width: 420px; display:flex; background:white; border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+            
+            <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400" 
+                 style="width:40%; object-fit:cover;">
+
+            <div style="padding:15px;">
+                <h3 style="margin:0;">Himalayan High Altitude</h3>
+                <p style="color:#555;">Flights, Royal Enfield 450, Gear</p>
+                <p style="font-weight:bold;">₹ 55,000</p>
+                <a href="#" style="color:#007bff; text-decoration:none;">View Details ➤</a>
+            </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div style="width: 420px; display:flex; background:white; border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+            
+            <img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98?w=400" 
+                 style="width:40%; object-fit:cover;">
+
+            <div style="padding:15px;">
+                <h3 style="margin:0;">Western Ghats Coastal Ride</h3>
+                <p style="color:#555;">Flights, Triumph Speed 400, Fuel</p>
+                <p style="font-weight:bold;">₹ 48,000</p>
+                <a href="#" style="color:#007bff; text-decoration:none;">View Details ➤</a>
+            </div>
+        </div>
+
     </div>
+
+</div>
+
+   
 </body>
 </html>
