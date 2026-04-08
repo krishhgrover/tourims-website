@@ -26,7 +26,7 @@
         <p style="color: #666;">Please enter details exactly as they appear on your government ID.</p>
         
         <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px solid #e1e1e1;">
-            <form name="checkoutForm" onsubmit="return validateBooking()" method="post">
+            <form onsubmit="submitBooking(event)">
                 <p>
                     <label>Primary Traveler Name (As per Passport/ID):</label><br>
                     <input type="text" id="pnrName" style="width: 100%; padding: 10px; margin-top: 5px;" placeholder="e.g. JOHN DOE">
@@ -59,6 +59,29 @@
         .then(data => {
             document.getElementById("navbar").innerHTML = data;
         });
+</script>
+<script>
+async function submitBooking(event) {
+    event.preventDefault();
+
+    const data = {
+        name: document.getElementById("pnrName").value,
+        age: document.getElementById("pnrAge").value,
+        phone: document.getElementById("pnrPhone").value,
+        email: document.getElementById("pnrEmail").value
+    };
+
+    const response = await fetch("/book", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    const result = await response.text();
+    alert(result);
+}
 </script>
 </body>
 </html>
