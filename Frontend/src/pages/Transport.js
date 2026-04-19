@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NavBar from "../components/NavBar";
 import Header from "../components/Header";
+import { useNavigate } from "react-router-dom";
 
 function Transport() {
   const [mode, setMode] = useState("flight");
@@ -10,6 +11,7 @@ function Transport() {
   const [to, setTo] = useState("");
   const [departure, setDeparture] = useState("");
   const [returnDate, setReturnDate] = useState("");
+  const navigate = useNavigate();
   const [message, setMessage] = useState("");
 
   const [image, setImage] = useState(
@@ -65,16 +67,26 @@ if (data.available) {
   }
 
   setPrice(totalPrice);
+
   setMessage("✅ Travel available on selected date!");
+
+  
 } else {
   setPrice(null); // reset price
 
   if (data.suggestions && data.suggestions.length > 0) {
-    const correctedDates = data.suggestions.map((dateStr) => {
-      const d = new Date(dateStr);
-      d.setDate(d.getDate() + 1);
-      return d.toISOString().split("T")[0];
-    });
+    const correctedDates = data.suggestions.map((item) => {
+  const rawDate = item.travel_date || item;
+
+  const d = new Date(rawDate);
+
+  // 🚨 safety check (prevents crash)
+  if (isNaN(d.getTime())) return "Invalid Date";
+
+  d.setDate(d.getDate() + 1);
+
+  return d.toISOString().split("T")[0];
+});
 
     setMessage(
       `❌ Not available. Suggested dates: ${correctedDates.join(", ")}`
@@ -235,11 +247,44 @@ if (data.available) {
     <p>{message}</p>
 
     {price && (
-      <p style={{ color: "green", fontSize: "18px" }}>
-        💰 Price: ₹{price}
-      </p>
-    )}
+  <div style={{ marginTop: "15px" }}>
+    <p style={{ color: "green", fontSize: "18px" }}>
+      💰 Price: ₹{price}
+    </p>
+
+    <button
+      onClick={() => {
+        const bookingData = {
+          from,
+          to,
+          departure,
+          returnDate: tripType === "round" ? returnDate : null,
+          tripType,
+          mode,
+          price,
+        };
+
+        sessionStorage.setItem("bookingData", JSON.stringify(bookingData));
+
+        navigate("/booking");
+      }}
+      style={{
+        marginTop: "10px",
+        padding: "10px",
+        width: "100%",
+        background: "#0a1429",
+        color: "white",
+        border: "none",
+        borderRadius: "6px",
+        cursor: "pointer",
+      }}
+    >
+      Proceed to Booking
+    </button>
   </div>
+)}
+  </div>
+
 )}
             </form>
           </div>
