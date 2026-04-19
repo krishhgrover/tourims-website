@@ -12,7 +12,7 @@ function Visa() {
     const nationality = prompt("Enter your nationality:");
 
     if (age >= 18 && nationality.toLowerCase() === "india") {
-      alert("✅ You are eligible for e-Visa!");
+      alert(" You are eligible for e-Visa!");
     } else {
       alert("❌ Visa eligibility failed. Please apply manually.");
     }

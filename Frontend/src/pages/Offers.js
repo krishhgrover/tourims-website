@@ -4,60 +4,60 @@ import Header from "../components/Header";
 
 function Offers() {
 
-  // ✅ State for Ticket Name
+  //  State for Ticket Name
   const [fName, setFName] = useState("");
   const [lName, setLName] = useState("");
   const [ticketName, setTicketName] = useState("");
 
-  // ✅ State for Email
+  //  State for Email
   const [email, setEmail] = useState("");
 
-  // ✅ Format Ticket Name (replaces onkeyup)
+  //  Format Ticket Name (replaces onkeyup)
   const formatTicketName = (first, last) => {
     const formatted = `${first.toUpperCase()} ${last.toUpperCase()}`;
     setTicketName(formatted);
   };
 
-  // ✅ Handle First Name
+  //  Handle First Name
   const handleFName = (e) => {
     const value = e.target.value;
     setFName(value);
     formatTicketName(value, lName);
   };
 
-  // ✅ Handle Last Name
+  // Handle Last Name
   const handleLName = (e) => {
     const value = e.target.value;
     setLName(value);
     formatTicketName(fName, value);
   };
 
-  // ✅ Verify Email
+  //  Verify Email
   const verifyEmail = () => {
     const atIndex = email.indexOf("@");
 
     if (atIndex === -1) {
       alert("❌ Invalid Email (No @ symbol)");
     } else {
-      alert(`✅ '@' found at position: ${atIndex}`);
+      alert(` '@' found at position: ${atIndex}`);
     }
   };
 
   return (
     <div style={{ backgroundColor: "#e5eef5", minHeight: "100vh" }}>
 
-      {/* ✅ Navbar */}
+      {/*  Navbar */}
       <Header />
       <Navbar />
 
 
-      {/* ✅ Container */}
+      {/*  Container */}
       <div style={styles.container}>
         <h2>My Account & Utilities</h2>
 
         <div style={styles.flex}>
 
-          {/* ✅ Ticket Name Box */}
+          {/*  Ticket Name Box */}
           <div style={styles.card}>
             <h3>Print E-Ticket Name</h3>
 
@@ -86,7 +86,7 @@ function Offers() {
             />
           </div>
 
-          {/* ✅ Email Verify Box */}
+          {/*  Email Verify Box */}
           <div style={styles.card}>
             <h3>Verify Account Email</h3>
 
@@ -110,7 +110,7 @@ function Offers() {
   );
 }
 
-// ✅ Only Offers Page CSS
+//  Only Offers Page CSS
 const styles = {
   container: {
     width: "80%",

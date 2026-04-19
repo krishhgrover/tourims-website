@@ -2,9 +2,16 @@ import React, { useState } from "react";
 import NavBar from "../components/NavBar";
 import Header from "../components/Header";
 
-
 function Transport() {
   const [mode, setMode] = useState("flight");
+  const [tripType, setTripType] = useState("oneway");
+  const [price, setPrice] = useState(null);
+  const [from] = useState("Mumbai");
+  const [to, setTo] = useState("");
+  const [departure, setDeparture] = useState("");
+  const [returnDate, setReturnDate] = useState("");
+  const [message, setMessage] = useState("");
+
   const [image, setImage] = useState(
     "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800"
   );
@@ -31,21 +38,87 @@ function Transport() {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(`${buttonText} clicked!`);
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  if (!to || !departure) {
+    setMessage("⚠️ Please select destination and departure date");
+    return;
+  }
+
+  const url = `http://localhost:3000/search-transport?from=Mumbai&to=${to}&date=${departure}`;
+
+  console.log("REQUEST URL:", url);
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+
+    console.log("API RESPONSE:", data);
+
+if (data.available) {
+  let totalPrice = data.data?.price || 0;
+
+  // ✅ ROUND TRIP = double price
+  if (tripType === "round" && returnDate) {
+    totalPrice = totalPrice * 2;
+  }
+
+  setPrice(totalPrice);
+  setMessage("✅ Travel available on selected date!");
+} else {
+  setPrice(null); // reset price
+
+  if (data.suggestions && data.suggestions.length > 0) {
+    const correctedDates = data.suggestions.map((dateStr) => {
+      const d = new Date(dateStr);
+      d.setDate(d.getDate() + 1);
+      return d.toISOString().split("T")[0];
+    });
+
+    setMessage(
+      `❌ Not available. Suggested dates: ${correctedDates.join(", ")}`
+    );
+  } else {
+    setMessage("❌ No available dates found");
+  }
+}
+
+  } catch (err) {
+    console.error(err);
+    setMessage("❌ Server error. Try again later.");
+  }
+};
+  const destinations = [
+    "Goa",
+    "Manali",
+    "Kerala",
+    "Jaipur & Udaipur",
+    "Kashmir",
+    "Andaman",
+    "Rishikesh",
+    "Darjeeling",
+    "Ooty",
+    "Ladakh",
+    "Dubai",
+    "Bali",
+    "Bangkok & Phuket",
+    "Singapore",
+    "Maldives",
+    "Paris & Rome",
+    "Switzerland",
+    "Tokyo & Kyoto",
+    "Sydney & Melbourne",
+    "USA",
+    "Istanbul & Cappadocia"
+  ];
 
   return (
     <div style={{ backgroundColor: "#e5eef5", minHeight: "100vh" }}>
-      
-      
       <Header />
-
       <NavBar />
 
       <div style={styles.container}>
-
         {/* Tabs */}
         <div style={styles.tabs}>
           <button
@@ -72,7 +145,6 @@ function Transport() {
 
         {/* Main Box */}
         <div style={styles.mainBox}>
-
           {/* Image */}
           <div style={{ flex: 1 }}>
             <img src={image} alt="transport" style={styles.image} />
@@ -82,54 +154,102 @@ function Transport() {
           <div style={styles.form}>
             <h2 style={{ color: "#0a1429" }}>Book Your Journey</h2>
 
+            {/* Trip Toggle */}
+            <div style={styles.tripToggle}>
+              <button
+                onClick={() => setTripType("oneway")}
+                style={tripType === "oneway" ? styles.activeToggle : styles.toggle}
+              >
+                One Way
+              </button>
+
+              <button
+                onClick={() => setTripType("round")}
+                style={tripType === "round" ? styles.activeToggle : styles.toggle}
+              >
+                Round Trip
+              </button>
+            </div>
+
             <form onSubmit={handleSubmit}>
-
+              {/* FROM - TO */}
               <div style={styles.row}>
-                <input placeholder="From" required style={styles.input} />
-                <input placeholder="To" required style={styles.input} />
-              </div>
+                <input value="Mumbai" disabled style={styles.input} />
 
-              <div style={styles.row}>
-                <input type="date" required style={styles.input} />
-                <input
-                  type="number"
-                  min="1"
-                  max="10"
-                  defaultValue="1"
+                <select
                   style={styles.input}
-                />
+                  required
+                  value={to}
+                  onChange={(e) => setTo(e.target.value)}
+                >
+                  <option value="">Select Destination</option>
+                  {destinations.map((d, i) => (
+                    <option key={i} value={d}>{d}</option>
+                  ))}
+                </select>
               </div>
 
+              {/* DATE LABEL */}
+              <div style={{ marginBottom: "10px", fontWeight: "bold" }}>
+                {tripType === "round"
+                  ? "Departure & Return Dates"
+                  : "Departure Date"}
+              </div>
+
+              {/* DATES */}
+              <div style={styles.row}>
+                <input
+                  type="date"
+                  required
+                  style={styles.input}
+                  value={departure}
+                  onChange={(e) => setDeparture(e.target.value)}
+                />
+
+                {tripType === "round" && (
+                  <input
+                    type="date"
+                    required
+                    style={styles.input}
+                    value={returnDate}
+                    onChange={(e) => setReturnDate(e.target.value)}
+                  />
+                )}
+              </div>
+
+              {/* CLASS */}
               <select style={styles.input}>
                 <option>Economy Class</option>
                 <option>Business Class</option>
                 <option>First Class</option>
               </select>
 
+              {/* BUTTON */}
               <button type="submit" style={styles.searchBtn}>
                 {buttonText}
               </button>
 
+              {/* MESSAGE */}
+              {message && (
+  <div style={{ marginTop: "10px", fontWeight: "bold" }}>
+    <p>{message}</p>
+
+    {price && (
+      <p style={{ color: "green", fontSize: "18px" }}>
+        💰 Price: ₹{price}
+      </p>
+    )}
+  </div>
+)}
             </form>
           </div>
         </div>
-
       </div>
     </div>
   );
 }
 
 const styles = {
-  header: {
-    background: "#0a1429",
-    textAlign: "center",
-    padding: "20px",
-  },
-  logo: {
-    color: "white",
-    fontStyle: "italic",
-    margin: 0,
-  },
   container: {
     width: "80%",
     margin: "40px auto",
@@ -189,6 +309,27 @@ const styles = {
     borderRadius: "6px",
     cursor: "pointer",
     marginTop: "15px",
+  },
+  tripToggle: {
+    display: "flex",
+    justifyContent: "center",
+    gap: "10px",
+    marginBottom: "15px",
+  },
+  toggle: {
+    padding: "8px 12px",
+    border: "1px solid #ccc",
+    background: "#fff",
+    cursor: "pointer",
+    borderRadius: "6px",
+  },
+  activeToggle: {
+    padding: "8px 12px",
+    border: "none",
+    background: "#ff6d38",
+    color: "white",
+    cursor: "pointer",
+    borderRadius: "6px",
   },
 };
 

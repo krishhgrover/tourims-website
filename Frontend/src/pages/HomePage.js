@@ -9,22 +9,22 @@ function Home() {
     <div style={{ backgroundColor: "#e5eef5", minHeight: "100vh" }}>
 
 
-      {/* ✅ Navbar */}
+      {/*  Navbar */}
       <Header />
       <Navbar />
 
-      {/* ✅ Main Container */}
+      {/*  Main Container */}
       <div style={styles.container}>
 
-        {/* ✅ Marquee */}
+        {/*  Marquee */}
         <marquee style={styles.marquee}>
           FLASH SALE: Get Flat 15% OFF on Coastal & Mountain Motorbike Expeditions using code RIDE15!
         </marquee>
 
-        {/* ✅ Heading */}
+        {/*  Heading */}
         <h1 style={styles.heading}>Our Services</h1>
 
-        {/* ✅ Cards */}
+        {/*  Cards */}
         <div style={styles.cardContainer}>
 
           {/* Visa */}
@@ -79,7 +79,7 @@ function Home() {
   );
 }
 
-// ✅ Only Home Page CSS (converted cleanly)
+//  Only Home Page CSS (converted cleanly)
 const styles = {
   header: {
     backgroundColor: "#0a1429",

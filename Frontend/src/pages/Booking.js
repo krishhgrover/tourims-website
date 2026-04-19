@@ -5,7 +5,7 @@ import Header from "../components/Header";
 
 function Booking() {
 
-  // ✅ State (instead of document.getElementById)
+  //  State (instead of document.getElementById)
   const [formData, setFormData] = useState({
     name: "",
     age: "",
@@ -15,7 +15,7 @@ function Booking() {
 
   const [errors, setErrors] = useState({});
 
-  // ✅ Handle Input Change
+  //  Handle Input Change
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -23,7 +23,7 @@ function Booking() {
     });
   };
 
-  // ✅ Validation
+  //  Validation
   const validate = () => {
     let err = {};
 
@@ -45,7 +45,7 @@ function Booking() {
     return Object.keys(err).length === 0;
   };
 
-  // ✅ Submit Function (API call same as yours)
+  //  Submit Function (API call same as yours)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -66,11 +66,11 @@ function Booking() {
   return (
     <div style={{ backgroundColor: "#e5eef5", minHeight: "100vh" }}>
 
-      {/* ✅ Navbar Component */}
+      {/*  Navbar Component */}
       <Header />
       <Navbar />
 
-      {/* ✅ Container */}
+      {/*  Container */}
       <div style={styles.container}>
         <h2>Traveler Details & Payment</h2>
         <p style={{ color: "#666" }}>
@@ -147,7 +147,7 @@ function Booking() {
   );
 }
 
-// ✅ Only Booking CSS (converted from your file)
+//  Only Booking CSS (converted from your file)
 const styles = {
   container: {
     width: "80%",

@@ -5,13 +5,13 @@ import Header from "../components/Header";
 
 function Recommender() {
 
-  // ✅ State
+  //  State
   const [budget, setBudget] = useState("");
   const [type, setType] = useState("");
   const [vibe, setVibe] = useState("");
   const [result, setResult] = useState("");
 
-  // ✅ Recommendation Logic (your JS → React)
+  //  Recommendation Logic (your JS → React)
   const recommend = () => {
     if (!budget || !type || !vibe) {
       setResult("❌ Please select all options.");
@@ -45,17 +45,17 @@ function Recommender() {
   return (
     <div style={{ backgroundColor: "#e5eef5", minHeight: "100vh" }}>
 
-      {/* ✅ Navbar */}
+      {/*  Navbar */}
       <Header />
       <Navbar />
 
-      {/* ✅ Container */}
+      {/*  Container */}
       <div style={styles.container}>
 
         <h1 style={styles.title}>🌍 Advanced AI Travel Recommender</h1>
         <p>Our algorithm will now analyze your travel persona.</p>
 
-        {/* ✅ Select Inputs */}
+        {/*  Select Inputs */}
         <select
           value={budget}
           onChange={(e) => setBudget(e.target.value)}
@@ -95,12 +95,12 @@ function Recommender() {
 
         <br /><br />
 
-        {/* ✅ Button */}
+        {/*  Button */}
         <button onClick={recommend} style={styles.button}>
           Analyze & Find Destination
         </button>
 
-        {/* ✅ Result */}
+        {/*  Result */}
         {result && (
           <div style={styles.result}>
             <h3>{result}</h3>
@@ -112,7 +112,7 @@ function Recommender() {
   );
 }
 
-// ✅ Only Recommender CSS
+//  Only Recommender CSS
 const styles = {
   container: {
     width: "80%",

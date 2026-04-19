@@ -1,64 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/NavBar";
 import Header from "../components/Header";
 
-
 function Packages() {
 
-  // ✅ Better: Store data in array (clean React way)
-  const packages = [
-    {
-      title: "Romantic Maldives",
-      desc: "Flights, 4N Water Villa, Meals",
-      price: "₹ 85,000",
-      img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400"
-    },
-    {
-      title: "Bali Adventure",
-      desc: "Flights, 5N Hotel, Water Sports",
-      price: "₹ 45,000",
-      img: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400"
-    },
-    {
-      title: "Himalayan High Altitude",
-      desc: "Flights, Royal Enfield 450, Gear",
-      price: "₹ 55,000",
-      img: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400"
-    },
-    {
-      title: "Western Ghats Coastal Ride",
-      desc: "Flights, Triumph Speed 400, Fuel",
-      price: "₹ 48,000",
-      img: "https://images.unsplash.com/photo-1493558103817-58b2924bce98?w=400"
-    }
-  ];
+  const [packages, setPackages] = useState([]);
+
+  // 🔥 Fetch data from backend
+  useEffect(() => {
+    fetch("http://localhost:3000/packages")   // or "http://localhost:3000/packages"
+      .then(res => res.json())
+      .then(data => {
+        setPackages(data);
+      })
+      .catch(err => console.error("Error fetching packages:", err));
+  }, []);
 
   return (
     <div style={{ backgroundColor: "#e5eef5", minHeight: "100vh" }}>
 
-      {/* ✅ Navbar */}
       <Header />
       <Navbar />
 
-      {/* ✅ Container */}
       <div style={styles.container}>
 
         <h2 style={styles.heading}>
           Top Trending Holiday Packages
         </h2>
 
-        {/* ✅ Cards */}
         <div style={styles.grid}>
 
-          {packages.map((pkg, index) => (
-            <div key={index} style={styles.card}>
+          {packages.map((pkg) => (
+            <div key={pkg.id} style={styles.card}>
 
-              <img src={pkg.img} alt="package" style={styles.image} />
+              <img src={pkg.image} alt="package" style={styles.image} />
 
               <div style={styles.content}>
-                <h3 style={{ margin: 0 }}>{pkg.title}</h3>
-                <p style={styles.desc}>{pkg.desc}</p>
-                <p style={styles.price}>{pkg.price}</p>
+                <h3 style={{ margin: 0 }}>{pkg.name}</h3>
+                <p style={styles.desc}>{pkg.description}</p>
+                <p style={styles.price}>₹ {pkg.price}</p>
+
                 <a href="#" style={styles.link}>
                   View Details ➤
                 </a>
@@ -75,51 +56,71 @@ function Packages() {
   );
 }
 
-// ✅ Only Packages CSS
+//  Only Packages CSS
 const styles = {
   container: {
-    width: "80%",
+    width: "85%",
     margin: "20px auto",
     background: "white",
     padding: "30px",
-    borderRadius: "8px",
+    borderRadius: "10px",
     boxShadow: "0 4px 12px rgba(0,0,0,0.1)"
   },
+
   heading: {
     color: "#0a1429",
     textAlign: "center",
     marginBottom: "30px"
   },
+
   grid: {
-    display: "flex",
-    flexWrap: "wrap",
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(420px, 1fr))",
     gap: "25px",
     justifyContent: "center"
   },
+
   card: {
-    width: "420px",
     display: "flex",
+    width: "100%",
+    height: "180px",   // 🔥 FIXED HEIGHT
     background: "white",
     borderRadius: "12px",
     overflow: "hidden",
     boxShadow: "0 4px 12px rgba(0,0,0,0.1)"
   },
+
   image: {
     width: "40%",
-    objectFit: "cover"
+    height: "100%",     // 🔥 FIXED HEIGHT MATCH
+    objectFit: "cover"  // 🔥 prevents stretching
   },
+
   content: {
-    padding: "15px"
+    padding: "15px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between"
   },
+
   desc: {
-    color: "#555"
+    color: "#555",
+    fontSize: "13px",
+    margin: "5px 0",
+    lineHeight: "1.4"
   },
+
   price: {
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontSize: "16px",
+    marginTop: "5px"
   },
+
   link: {
     color: "#007bff",
-    textDecoration: "none"
+    textDecoration: "none",
+    fontWeight: "500",
+    marginTop: "8px"
   }
 };
 
